@@ -7,7 +7,7 @@ import requests
 import logger
 import threading
 
-class HCaptchaSolver:
+class HSLTranslated:
     def __init__(this, proxy, site_key, host):
         this.proxy = proxy
         this.site_key = site_key
@@ -81,7 +81,7 @@ class HCaptchaSolver:
         try:
             r = requests.get(
                 f"https://hcaptcha.com/checksiteconfig?host={this.host}&sitekey={this.site_key}&sc=1&swa=1",
-                proxies={"http": f"http://{this.proxy}", "https": f"http://{this.proxy}"}
+                proxies={"http": f"http://{this.proxy}", "https": f"http://{this.proxy}"} if this.proxy else None
             )
             if r.json()["pass"]:
                 return r.json()["c"]
@@ -90,7 +90,7 @@ class HCaptchaSolver:
         except:
             return False
     
-instance =  HCaptchaSolver(None, "4c672d35-0701-42b2-88c3-78380b0db560", host="discord.com")
+instance =  HSLTranslated(None, "4c672d35-0701-42b2-88c3-78380b0db560", host="discord.com")
     
 def start():
     while True:
